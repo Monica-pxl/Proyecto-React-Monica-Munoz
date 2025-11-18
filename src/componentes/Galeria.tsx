@@ -1,78 +1,84 @@
-import React, { useState } from 'react'
-import { elementos } from '../data/data'
-import Tarjeta from './Tarjeta'
-import Controles from './Controles'
+import { useState } from "react";
+import { elementos } from "../data/data";
+import Tarjeta from "./Tarjeta";
+import Controles from "./Controles";
 
 export type Card = {
-  id: number
-  titulo: string
-  url: string
-  descripcion: string
-  likes?: number
-}
+  id: number;
+  titulo: string;
+  url: string;
+  descripcion: string;
+  likes: number;
+};
 
-const Galeria: React.FC = () => {
-  const [cards, setCards] = useState<Card[]>(() => elementos.map((e) => ({ ...e, likes: 0 })))
-  const [visible, setVisible] = useState(true)
-  const [themeDark, setThemeDark] = useState(false)
+function Galeria() {
+  const [cards, setCards] = useState<Card[]>(elementos.map(item => ({ ...item, likes: 0 })));
+  const [visible, setVisible] = useState(true);
+  const [dark, setDark] = useState(false);
 
-  const agregar = (titulo: string, url: string, descripcion: string) => {
-    const nueva: Card = {
-      id: Date.now(),
-      titulo,
-      url,
-      descripcion,
-      likes: 0
-    }
-    setCards((prev) => [nueva, ...prev])
+  function agregarCard(titulo: string, url: string, descripcion: string) {
+    const nuevaCard: Card = { id: Date.now(), titulo, url, descripcion, likes: 0 };
+    setCards([nuevaCard, ...cards]);
   }
 
-  const eliminar = (id: number) => {
-    setCards((prev) => prev.filter((c) => c.id !== id))
+  function eliminarCard(id: number) {
+    setCards(cards.filter(c => c.id !== id));
   }
 
-  const toggleMostrar = () => setVisible((v) => !v)
-  const toggleTheme = () => setThemeDark((t) => !t)
+  function darLike(id: number) {
+    setCards(
+      cards.map(c => c.id === id ? { ...c, likes: c.likes + 1 } : c)
+    );
+  }
 
-  const incrementarLike = (id: number) => {
-    setCards((prev) => prev.map((c) => (c.id === id ? { ...c, likes: (c.likes || 0) + 1 } : c)))
+  function editarCard(id: number, nuevoTitulo: string, nuevaUrl: string, nuevaDescripcion: string) {
+    setCards(
+      cards.map(c => c.id === id ? { ...c, titulo: nuevoTitulo, url: nuevaUrl, descripcion: nuevaDescripcion } : c)
+    );
   }
 
   return (
-    <div className={`galeria ${themeDark ? 'theme-dark' : 'theme-light'}`}>
+    <div className={`galeria ${dark ? "theme-dark" : "theme-light"}`}>
       <header className="galeria-header">
-        <h1>Galería de tarjetas</h1>
+        <h1>Galería</h1>
       </header>
 
       <main className="galeria-main">
         <Controles
-          onAdd={agregar}
-          onToggle={toggleMostrar}
-          onToggleTheme={toggleTheme}
+          onAdd={agregarCard}
+          onToggle={() => setVisible(!visible)}
+          onToggleTheme={() => setDark(!dark)}
           visible={visible}
-          isDark={themeDark}
+          isDark={dark}
         />
 
         {!visible ? (
           <p className="galeria-hidden">Galería oculta</p>
         ) : (
           <div className="galeria-grid">
-            {cards.map((card) => (
+            {cards.map(c => (
               <Tarjeta
-                key={card.id}
-                titulo={card.titulo}
-                url={card.url}
-                descripcion={card.descripcion}
-                likes={card.likes || 0}
-                onDelete={() => eliminar(card.id)}
-                onLike={() => incrementarLike(card.id)}
+                key={c.id}
+                titulo={c.titulo}
+                url={c.url}
+                descripcion={c.descripcion}
+                likes={c.likes}
+                onDelete={() => eliminarCard(c.id)}
+                onLike={() => darLike(c.id)}
+                onEdit={() => {
+                  const nuevoTitulo = prompt("Nuevo título", c.titulo) || c.titulo;
+                  const nuevaUrl = prompt("Nueva URL de imagen", c.url) || c.url;
+                  const nuevaDescripcion = prompt("Nueva descripción", c.descripcion) || c.descripcion;
+
+                  editarCard(c.id, nuevoTitulo, nuevaUrl, nuevaDescripcion);
+                }}
               />
             ))}
           </div>
         )}
       </main>
     </div>
-  )
+  );
 }
 
-export default Galeria
+export default Galeria;

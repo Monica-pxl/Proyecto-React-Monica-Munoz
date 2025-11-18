@@ -1,15 +1,15 @@
-import React from 'react'
-
 type Props = {
 	onLike: () => void
 	onDelete: () => void
+	onEdit: () => void
 }
 
-const Botones: React.FC<Props> = ({ onLike, onDelete }) => {
+function Botones({ onDelete, onLike, onEdit }: Props) {
 	return (
 		<div className="botones">
 			<button type="button" className="btn-like" onClick={onLike} aria-label="like">👍</button>
 			<button type="button" className="btn-delete" onClick={onDelete} aria-label="delete">Eliminar</button>
+			<button type="button" className="btn-edit" onClick={onEdit} aria-label="edit">Editar</button>
 		</div>
 	)
 }
