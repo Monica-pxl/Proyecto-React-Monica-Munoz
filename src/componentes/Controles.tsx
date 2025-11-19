@@ -10,7 +10,7 @@ type ControlesProps = {
 
 function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: ControlesProps) {
   const [titulo, setTitulo] = useState("");
-  const [url, setUrl] = useState("https://via.placeholder.com/400x300?text=Imagen");
+  const [url, setUrl] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
   function enviar(e: React.FormEvent) {
@@ -22,6 +22,7 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
 
     setTitulo("");
     setDescripcion("");
+    setUrl("");
   }
 
   return (
@@ -57,7 +58,7 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
         </button>
 
         <button onClick={onToggleTheme}>
-          {isDark ? "Modo oscuro 🌙​" : "Modo claro ☀️​"}
+          {isDark ? "Modo claro ☀️​" : "Modo oscuro 🌙​"}
         </button>
       </div>
     </section>

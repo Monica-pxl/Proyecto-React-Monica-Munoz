@@ -9,15 +9,16 @@ export type Card = {
   url: string;
   descripcion: string;
   likes: number;
+  liked: boolean
 };
 
 function Galeria() {
-  const [cards, setCards] = useState<Card[]>(elementos.map(item => ({ ...item, likes: 0 })));
+  const [cards, setCards] = useState<Card[]>(elementos.map(item => ({ ...item, likes: 0, liked: false })));
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
 
   function agregarCard(titulo: string, url: string, descripcion: string) {
-    const nuevaCard: Card = { id: Date.now(), titulo, url, descripcion, likes: 0 };
+    const nuevaCard: Card = { id: Date.now(), titulo, url, descripcion, likes: 0, liked: false };
     setCards([nuevaCard, ...cards]);
   }
 
@@ -26,9 +27,19 @@ function Galeria() {
   }
 
   function darLike(id: number) {
-    setCards(
-      cards.map(c => c.id === id ? { ...c, likes: c.likes + 1 } : c)
-    );
+    setCards(cards.map(c => {
+
+      if (c.id === id) {
+
+        if (c.liked) {
+          return { ...c, likes: c.likes - 1, liked: false };
+
+        }else{
+          return { ...c, likes: c.likes + 1, liked: true };
+        }
+      }
+      return c;
+    }));
   }
 
   function editarCard(id: number, nuevoTitulo: string, nuevaUrl: string, nuevaDescripcion: string) {
@@ -65,13 +76,9 @@ function Galeria() {
                 likes={c.likes}
                 onDelete={() => eliminarCard(c.id)}
                 onLike={() => darLike(c.id)}
-                onEdit={() => {
-                  const nuevoTitulo = prompt("Nuevo título", c.titulo) || c.titulo;
-                  const nuevaUrl = prompt("Nueva URL de imagen", c.url) || c.url;
-                  const nuevaDescripcion = prompt("Nueva descripción", c.descripcion) || c.descripcion;
-
-                  editarCard(c.id, nuevoTitulo, nuevaUrl, nuevaDescripcion);
-                }}
+                onEdit={(nuevoTitulo, nuevaUrl, nuevaDescripcion) =>
+                  editarCard(c.id, nuevoTitulo, nuevaUrl, nuevaDescripcion)
+                }
               />
             ))}
           </div>
