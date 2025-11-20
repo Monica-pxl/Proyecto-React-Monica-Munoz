@@ -13,7 +13,13 @@ export type Card = {
 };
 
 function Galeria() {
+
+  //Contiene todas las tarjetas de la galeria:
+  //El setCards permite modificar ese estado, osea cuando añades, borras, editas tarjeta.
   const [cards, setCards] = useState<Card[]>(elementos.map(item => ({ ...item, likes: 0, liked: false })));
+
+  //Botones: Añadir, Ocultar/Mostrar, Tema Claro/Oscuro:
+  //Están aqui con UseState y NO en Controles porque afectan a toda la pagina, no solo a un formulario:
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
 
@@ -74,6 +80,8 @@ function Galeria() {
                 url={c.url}
                 descripcion={c.descripcion}
                 likes={c.likes}
+
+                //Funciones que provienen de Botones:
                 onDelete={() => eliminarCard(c.id)}
                 onLike={() => darLike(c.id)}
                 onEdit={(nuevoTitulo, nuevaUrl, nuevaDescripcion) =>

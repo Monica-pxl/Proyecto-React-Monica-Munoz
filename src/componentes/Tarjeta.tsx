@@ -6,19 +6,26 @@ type TarjetaProps = {
   url: string;
   descripcion: string;
   likes: number;
+
+  //Funciones de Botones:
   onDelete: () => void;
   onLike: () => void;
   onEdit: (nuevoTitulo: string, nuevaUrl: string, nuevaDescripcion: string) => void;
 };
 
 function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: TarjetaProps) {
+
+  //Botones de Editar y sus nuevos campos para meter dentro del target:
   const [editMode, setEditMode] = useState(false);
   const [newTitulo, setNewTitulo] = useState(titulo);
   const [newUrl, setNewUrl] = useState(url);
   const [newDescripcion, setNewDescripcion] = useState(descripcion);
 
+  //Guardar cambios:
   const handleSave = () => {
     onEdit(newTitulo, newUrl, newDescripcion);
+
+    //Se desactiva el modo edición:
     setEditMode(false);
   };
 

@@ -1,14 +1,17 @@
 import { useState } from "react";
 
+//Botones de la pagina general:
 type ControlesProps = {
   onAdd: (titulo: string, url: string, descripcion: string) => void;
   onToggle: () => void;
-  onToggleTheme: () => void;
   visible: boolean;
+  onToggleTheme: () => void;
   isDark: boolean;
 };
 
 function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: ControlesProps) {
+
+  //Estados para los inputs:
   const [titulo, setTitulo] = useState("");
   const [url, setUrl] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -16,17 +19,25 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
   function enviar(e: React.FormEvent) {
     e.preventDefault();
 
-    if (titulo.trim() === "") return;
+    // si no hay título, no haces nada
+    if (!titulo) {
+      alert("Escribe un título");
+      return;
+    }
 
+    // crear la tarjeta
     onAdd(titulo, url, descripcion);
 
+    // limpiar campos
     setTitulo("");
-    setDescripcion("");
     setUrl("");
+    setDescripcion("");
   }
+
 
   return (
     <section className="controles">
+
       <form onSubmit={enviar} className="controles-form">
         <div className="input-button-group">
           <input

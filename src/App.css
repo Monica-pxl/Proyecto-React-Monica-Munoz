@@ -61,21 +61,12 @@ body {
 
 .galeria-grid {
   display: grid;
-  gap: 36px; /* más separación entre tarjetas */
-  grid-template-columns: repeat(3, 1fr); /* fuerza 3 tarjetas por fila en escritorio */
-  justify-content: center; /* centra las tarjetas */
+  gap: 36px;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
   width: 100%;
-  max-width: 1400px; /* ancho máximo de la galería */
-  margin: 0 auto; /* centra el grid en la página */
-  grid-auto-flow: row; /* asegurar que nuevos items vayan a la siguiente fila */
-}
-
-
-
-
-@media (max-width: 900px) {
-  .galeria-header { padding: 14px; }
-  .galeria-main { padding: 12px; }
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* =========================
@@ -116,9 +107,7 @@ body {
   gap: 12px; 
 }
 
-/* Evitar que elementos internos forcen el ancho del grid y provoquen recortes */
 .tarjeta, .tarjeta * { box-sizing: border-box; min-width: 0; }
-.tarjeta-media img { display: block; max-width: 100%; height: 100%; object-fit: cover; }
 
 .tarjeta-title { 
   margin: 0; 
@@ -172,8 +161,10 @@ body {
 
 .btn-like { background: linear-gradient(180deg,#eef2ff,#dfe8ff); color: #111827; }
 .btn-like:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
+
 .btn-edit { background: linear-gradient(180deg,#f0f0f0,#d9d9d9); color: #111827; }
 .btn-edit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
+
 .btn-delete { background: linear-gradient(180deg,#fff0f0,#ffeaea); color: #9b1c1c; border: 1px solid rgba(239,68,68,0.12); }
 .btn-delete:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(239,68,68,0.08); }
 
@@ -185,9 +176,8 @@ body {
   border: 1px solid rgba(0,0,0,0.08);
 }
 .galeria.theme-dark .btn-like:hover,
-.galeria.theme-dark .btn-edit:hover {
-  background: #f0f0f0;
-}
+.galeria.theme-dark .btn-edit:hover { background: #f0f0f0; }
+
 .galeria.theme-dark .btn-delete {
   background: #fee2e2;
   color: #b91c1c;
@@ -197,10 +187,13 @@ body {
 /* =========================
    Controles
 ========================= */
-.controles { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 12px; 
+.controles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto 50px auto;
 }
 
 .controles-form { 
@@ -216,14 +209,13 @@ body {
   border-radius: 10px; 
   border: 1px solid #e6eef6; 
   font-size: 0.96rem; 
+  font-family: inherit;
   background: #ffffff; 
   color: #111827;
 }
 
 .controles-form input::placeholder,
-.controles-form textarea::placeholder {
-  color: #888;
-}
+.controles-form textarea::placeholder { color: #888; }
 
 .controles-form input:focus,
 .controles-form textarea:focus {
@@ -235,7 +227,8 @@ body {
 .controles-form textarea {
   resize: vertical; 
   min-height: 60px; 
-  grid-column: 1 / -1; 
+  line-height: 1.35;
+  grid-column: 1 / -1;
 }
 
 .controles-actions { 
@@ -257,96 +250,66 @@ body {
 
 .input-button-group {
   display: flex;
-  gap: 8px; /* espacio entre input y botón */
+  gap: 8px;
 }
-
-.input-button-group input {
-  flex: 1; /* ocupa todo el espacio disponible */
-}
-
-.input-button-group button {
-  flex: 0; /* solo ocupa lo necesario */
-}
-
-/* Mantener el botón 'Añadir' visible en pantallas estrechas sin moverlo innecesariamente */
-@media (max-width: 700px) {
-  .controles-form {
-    grid-template-columns: 1fr auto; /* grupo de input + botón al lado */
-    grid-auto-rows: auto;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .controles-form .input-button-group { grid-column: 1 / 2; display: flex; gap: 8px; align-items: center; }
-
-  /* colocar el botón de submit en la segunda columna de la primera fila */
-  .controles-form > button[type="submit"] { grid-column: 2 / 3; grid-row: 1; }
-
-  /* Forzar que el input URL y el textarea ocupen toda la fila siguiente */
-  .controles-form > input { grid-column: 1 / -1; grid-row: 2; }
-  .controles-form > textarea { grid-column: 1 / -1; grid-row: 3; }
-
-  /* evitar que el texto del botón haga wrap */
-  .controles-form button { white-space: nowrap; flex-shrink: 0; font-size: 0.9rem; padding: 7px 10px; }
-}
-
-
-
-
-
-
+.input-button-group input { flex: 1; }
+.input-button-group button { flex: 0; }
 
 /* Controles modo oscuro */
 .galeria.theme-dark .controles-form input,
 .galeria.theme-dark .controles-form textarea {
   background: #2b2b2b; 
   color: #f3f3f3; 
-  border: 1px solid #555; 
+  border: 1px solid #555;
 }
 
 .galeria.theme-dark .controles-form input::placeholder,
-.galeria.theme-dark .controles-form textarea::placeholder {
-  color: #aaa;
-}
+.galeria.theme-dark .controles-form textarea::placeholder { color: #aaa; }
 
 .galeria.theme-dark .controles-actions button {
   background: #ffffff; 
   color: #000000; 
   border: 1px solid rgba(0,0,0,0.08);
 }
+.galeria.theme-dark .controles-actions button:hover { background: #f0f0f0; }
 
-.galeria.theme-dark .controles-actions button:hover {
-  background: #f0f0f0;
-}
-
-
-
-/* Media queries para pantallas más pequeñas */
-@media (max-width: 900px) {
-  .galeria-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet */
-    gap: 22px;
-    max-width: 980px;
-  }
-}
-
-@media (max-width: 600px) {
-  .galeria-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-/* Ajustes responsivos adicionales para fuentes y padding en botones */
+/* =========================
+   Media Queries
+========================= */
 @media (max-width: 1000px) {
   .controles-actions button, .btn-like, .btn-delete, .btn-edit { font-size: 0.95rem; padding: 8px 10px; }
   .tarjeta-media { height: 180px; }
   .tarjeta-body { padding: 14px; }
 }
 
+@media (max-width: 900px) {
+  .galeria-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    max-width: 980px;
+  }
+  .galeria-header { padding: 14px; }
+  .galeria-main { padding: 12px; }
+}
+
+@media (max-width: 700px) {
+  .controles-form {
+    grid-template-columns: 1fr auto;
+    grid-auto-rows: auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .controles-form .input-button-group { grid-column: 1 / 2; display: flex; gap: 8px; align-items: center; }
+  .controles-form > button[type="submit"] { grid-column: 2 / 3; grid-row: 1; }
+  .controles-form > input { grid-column: 1 / -1; grid-row: 2; }
+  .controles-form > textarea { grid-column: 1 / -1; grid-row: 3; }
+  .controles-form button { white-space: nowrap; flex-shrink: 0; font-size: 0.9rem; padding: 7px 10px; }
+}
+
 @media (max-width: 600px) {
+  .galeria-grid { grid-template-columns: 1fr; gap: 16px; }
   .controles-actions button, .btn-like, .btn-delete, .btn-edit { font-size: 0.82rem; padding: 6px 8px; }
   .tarjeta-media { height: 150px; }
   .tarjeta-title { font-size: 1.02rem; }
 }
-
