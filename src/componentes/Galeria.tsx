@@ -56,10 +56,6 @@ function Galeria() {
 
   return (
     <div className={`galeria ${dark ? "theme-dark" : "theme-light"}`}>
-      <header className="galeria-header">
-        <h1>Galería</h1>
-      </header>
-
       <main className="galeria-main">
         <Controles
           onAdd={agregarCard}

@@ -37,31 +37,33 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
 
   return (
     <section className="controles">
-
-      <form onSubmit={enviar} className="controles-form">
-        <div className="input-button-group">
-          <input
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            placeholder="Título"
-          />
+      <div className="controles-form-wrapper">
+        <div className="galeria-header">
+          <h1>Añadir un tarject</h1>
         </div>
 
-        <input
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="URL de imagen"
-        />
+        <form className="controles-form" onSubmit={enviar}>
+          <div className="input-field titulo">
+            <label htmlFor="titulo">Escribe un título llamativo para tu tarjeta</label>
+            <input value={titulo} onChange={e => setTitulo(e.target.value)} placeholder="Título" />
+          </div>
 
-        <button type="submit">Añadir</button>
+          <div className="input-field url">
+            <label htmlFor="url">Pega aquí la URL de la imagen (debe ser válida)</label>
+            <input type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="URL de imagen" />
+          </div>
 
-        <textarea
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-          placeholder="Descripción"
-        />
+          <div className="input-field descripcion">
+            <label htmlFor="descripcion">Describe tu tarjeta brevemente</label>
+            <textarea value={descripcion} onChange={e => setDescripcion(e.target.value)} placeholder="Descripción" />
+          </div>
 
-      </form>
+          <div className="add-button-field">
+            <button type="submit">Añadir</button>
+          </div>
+        </form>
+      </div>
+
 
       <div className="controles-actions">
         <button onClick={onToggle}>
@@ -72,7 +74,7 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
           {isDark ? "Modo claro ☀️​" : "Modo oscuro 🌙​"}
         </button>
       </div>
-    </section>
+  </section>
   );
 }
 
