@@ -23,8 +23,15 @@ body {
   flex-direction: column;
 }
 
-.galeria.theme-light { background: #f0f0f0; color: #111827; }
-.galeria.theme-dark  { background: #0b0b0b; color: #e5e7eb; }
+.galeria.theme-light {
+  background: #f0f0f0;
+  color: #111827;
+}
+
+.galeria.theme-dark {
+  background: #0b0b0b;
+  color: #e5e7eb;
+}
 
 .galeria-header {
   padding: 18px 28px;
@@ -33,7 +40,10 @@ body {
   justify-content: center;
 }
 
-.galeria-header h1 { margin: 0; font-size: 1.6rem; }
+.galeria-header h1 { 
+  margin: 0; 
+  font-size: 1.6rem; 
+}
 
 .galeria-main { 
   flex: 1; 
@@ -44,7 +54,10 @@ body {
   overflow: auto; 
 }
 
-.galeria-hidden { text-align: center; color: #777; }
+.galeria-hidden { 
+  text-align: center; 
+  color: #777; 
+}
 
 .galeria-grid {
   display: grid;
@@ -87,18 +100,45 @@ body {
   display: block; 
 }
 
-.tarjeta-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.tarjeta-body { 
+  padding: 16px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+}
 
-.tarjeta-title { margin: 0; font-size: 1.12rem; font-weight: 700; }
+.tarjeta-title { 
+  margin: 0; 
+  font-size: 1.12rem; 
+  font-weight: 700; 
+}
 
-.tarjeta-desc { margin: 0; color: #475569; font-size: 0.96rem; line-height: 1.35; }
+.tarjeta-desc { 
+  margin: 0; 
+  color: #475569; 
+  font-size: 0.96rem; 
+  line-height: 1.35; 
+}
 
-.tarjeta-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.tarjeta-row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 12px; 
+}
 
-.tarjeta-likes { color: #0f172a; font-weight: 700; font-size: 0.98rem; }
+.tarjeta-likes { 
+  color: #0f172a; 
+  font-weight: 700; 
+  font-size: 0.98rem;
+}
 
 /* Tarjeta modo oscuro */
-.galeria.theme-dark .tarjeta { background: #1f1f1f; color: #e6e6e6; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+.galeria.theme-dark .tarjeta {
+  background: #1f1f1f;
+  color: #e6e6e6;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
 .galeria.theme-dark .tarjeta-desc { color: #cbd5e1; }
 .galeria.theme-dark .tarjeta-likes { color: #f3f4f6; }
 
@@ -128,11 +168,18 @@ body {
 
 /* Botones modo oscuro */
 .galeria.theme-dark .btn-like,
-.galeria.theme-dark .btn-edit { background: #ffffff; color: #000; border: 1px solid rgba(0,0,0,0.08); }
+.galeria.theme-dark .btn-edit {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgba(0,0,0,0.08);
+}
 .galeria.theme-dark .btn-like:hover,
 .galeria.theme-dark .btn-edit:hover { background: #f0f0f0; }
 
-.galeria.theme-dark .btn-delete { background: #fee2e2; color: #b91c1c; }
+.galeria.theme-dark .btn-delete {
+  background: #fee2e2;
+  color: #b91c1c;
+}
 .galeria.theme-dark .btn-delete:hover { background: #fca5a5; }
 
 /* =========================
@@ -147,6 +194,7 @@ body {
   margin: 0 auto 50px auto;
 }
 
+/* Wrapper tipo tarjeta */
 .controles-form-wrapper {
   background: #fff;
   border-radius: 12px;
@@ -157,33 +205,44 @@ body {
   gap: 12px;
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
+.controles-form-wrapper:hover {
+  box-shadow: 0 14px 30px rgba(2,6,23,0.12);
+}
 
-.controles-form-wrapper:hover { box-shadow: 0 14px 30px rgba(2,6,23,0.12); }
+/* Modo oscuro */
+.galeria.theme-dark .controles-form-wrapper {
+  background: #1f1f1f;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+.galeria.theme-dark .controles-form-wrapper:hover {
+  box-shadow: 0 14px 30px rgba(0,0,0,0.7);
+}
 
-.galeria.theme-dark .controles-form-wrapper { background: #1f1f1f; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
-.galeria.theme-dark .controles-form-wrapper:hover { box-shadow: 0 14px 30px rgba(0,0,0,0.7); }
-
+/* Formulario interno */
 .controles-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Fila superior: título | url | añadir */
+.input-row {
   display: grid;
-  gap: 16px;
   grid-template-columns: 2fr 2fr auto;
-  grid-template-areas:
-    "titulo url boton"
-    "descripcion descripcion descripcion";
+  gap: 8px;
   align-items: end;
 }
 
-.input-field { display: flex; flex-direction: column; gap: 6px; }
+/* Cada input + label */
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-.input-field.titulo { grid-area: titulo; }
-.input-field.url { grid-area: url; }
-.input-field.descripcion { grid-area: descripcion; }
-
-.add-button-field { grid-area: boton; align-self: center; }
-
+/* Botón añadir ocupa altura de input */
 .add-button-field button {
-  height: auto;       
-  padding: 10px 14px; 
+  height: 100%;
   border-radius: 10px;
   cursor: pointer;
   border: none;
@@ -193,21 +252,9 @@ body {
   font-weight: 600;
   transition: all 140ms ease;
 }
-
 .add-button-field button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(79,70,229,0.2);
-}
-
-.galeria.theme-dark .add-button-field button {
-  background: linear-gradient(180deg, #ffffff, #e5e5e5);
-  color: #000;
-  border: 1px solid rgba(0,0,0,0.08);
-}
-
-.galeria.theme-dark .add-button-field button:hover {
-  background: #f0f0f0;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 /* Inputs y textarea */
@@ -215,7 +262,7 @@ body {
 .controles-form textarea {
   padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #b0b0b0;
+  border: 1px solid #b0b0b0; /* borde oscuro para modo claro */
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   font-size: 0.96rem;
   font-family: inherit;
@@ -233,16 +280,67 @@ body {
   box-shadow: 0 6px 20px rgba(99,102,241,0.1);
 }
 
-.input-field textarea { min-height: 60px; resize: vertical; }
+/* Textarea fila inferior */
+.input-field textarea {
+  min-height: 60px;
+  resize: vertical;
+}
 
+/* Etiquetas arriba de cada input */
+.input-field label {
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Controles modo oscuro */
 .galeria.theme-dark .controles-form input,
-.galeria.theme-dark .controles-form textarea { background: #2b2b2b; color: #f3f3f3; border: 1px solid #555; }
-.galeria.theme-dark .input-field label { color: #ccc; }
+.galeria.theme-dark .controles-form textarea {
+  background: #2b2b2b;
+  color: #f3f3f3;
+  border: 1px solid #555;
+}
+.galeria.theme-dark .input-field label {
+  color: #ccc;
+}
+.galeria.theme-dark .add-button-field button {
+  background: linear-gradient(180deg, #ffffff, #e5e5e5);
+  color: #000;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.galeria.theme-dark .add-button-field button:hover {
+  background: #f0f0f0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
 
-.input-field label { font-size: 0.85rem; color: #555; font-weight: 500; }
+/* Cada campo input con su label */
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px; /* aumenta separación vertical */
+}
 
-/* Controles de acción */
-.controles-actions { display: flex; gap: 10px; }
+/* Fila de Título + URL + Botón */
+.input-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px; /* espacio antes de la descripción */
+}
+
+/* Descripción */
+.input-field.textarea-field {
+  margin-top: 8px; /* opcional, para que no quede pegada a la fila superior */
+}
+
+
+/* Controles de acción (botones de mostrar/ocultar y tema) */
+.controles-actions {
+  display: flex;
+  gap: 10px;
+}
+
 .controles-actions button {
   padding: 10px 14px;
   border-radius: 10px;
@@ -265,14 +363,18 @@ body {
 }
 
 @media (max-width: 900px) {
-  .galeria-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; max-width: 980px; }
+  .galeria-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    max-width: 980px;
+  }
   .galeria-header { padding: 14px; }
   .galeria-main { padding: 12px; }
 }
 
 @media (max-width: 700px) {
-  .controles-form { grid-template-columns: 1fr; grid-template-areas: "titulo" "url" "descripcion" "boton"; align-items: stretch; }
-  .add-button-field button { width: 100%; }
+  .input-row { grid-template-columns: 1fr auto; }
+  .add-button-field button { width: 100%; height: auto; }
   .input-field textarea { grid-column: 1 / -1; }
 }
 
@@ -282,3 +384,111 @@ body {
   .tarjeta-media { height: 150px; }
   .tarjeta-title { font-size: 1.02rem; }
 }
+
+
+
+.controles-form {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 2fr 2fr auto;
+  grid-template-areas: 
+    "titulo url boton"
+    "descripcion descripcion descripcion";
+  align-items: end;
+}
+
+.input-field.titulo { grid-area: titulo; }
+.input-field.url { grid-area: url; }
+.add-button-field { grid-area: boton; }
+.input-field.descripcion { grid-area: descripcion; }
+
+/* Media query: en pantallas pequeñas, todo apilado */
+@media (max-width: 700px) {
+  .controles-form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "titulo"
+      "url"
+      "descripcion"
+      "boton";
+    align-items: stretch;
+  }
+
+  .add-button-field button {
+    width: 100%;
+  }
+}
+
+
+.controles-form {
+  display: grid;
+  gap: 16px; /* espacio vertical entre filas */
+  grid-template-columns: 2fr 2fr auto;
+  grid-template-areas:
+    "titulo url boton"
+    "descripcion descripcion descripcion";
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* espacio entre label e input */
+}
+
+.input-field.titulo { grid-area: titulo; }
+.input-field.url { grid-area: url; }
+.input-field.descripcion { grid-area: descripcion; }
+.add-button-field { grid-area: boton; align-self: center; }
+
+.add-button-field button {
+  height: auto;       /* quitar altura del 100%, dejar que el padding defina la altura */
+  padding: 10px 14px; /* ajusta la altura un poco más pequeña si quieres */
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(180deg, #111827, #333333);
+  color: white;
+  box-shadow: 0 8px 20px rgba(79,70,229,0.12);
+  font-weight: 600;
+  transition: all 140ms ease;
+}
+
+
+
+.add-button-field button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79,70,229,0.2);
+}
+
+/* Modo oscuro */
+.galeria.theme-dark .add-button-field button {
+  background: linear-gradient(180deg, #ffffff, #e5e5e5);
+  color: #000;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.galeria.theme-dark .add-button-field button:hover {
+  background: #f0f0f0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Media query: en pantallas pequeñas, todo apilado */
+@media (max-width: 700px) {
+  .controles-form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "titulo"
+      "url"
+      "descripcion"
+      "boton";
+  }
+
+  .add-button-field button {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
