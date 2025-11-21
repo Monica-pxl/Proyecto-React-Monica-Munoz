@@ -14,6 +14,8 @@ body {
   color: #111827;
 }
 
+
+
 /* =========================
    Galería
 ========================= */
@@ -68,6 +70,9 @@ body {
   max-width: 1400px;
   margin: 0 auto;
 }
+
+
+
 
 /* =========================
    Tarjeta
@@ -133,14 +138,67 @@ body {
   font-size: 0.98rem;
 }
 
-/* Tarjeta modo oscuro */
+.tarjeta .controles-form {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr; /* 2 columnas arriba */
+  gap: 10px !important;
+}
+
+.tarjeta .controles-form-textarea {
+  grid-column: 1 / -1;
+}
+
+.tarjeta .botones {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 10px;
+}
+
 .galeria.theme-dark .tarjeta {
   background: #1f1f1f;
   color: #e6e6e6;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }
-.galeria.theme-dark .tarjeta-desc { color: #cbd5e1; }
-.galeria.theme-dark .tarjeta-likes { color: #f3f4f6; }
+
+.galeria.theme-dark .tarjeta-desc { 
+  color: #cbd5e1; 
+}
+
+.galeria.theme-dark .tarjeta-likes { 
+  color: #f3f4f6; 
+}
+
+.tarjeta .controles-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+}
+
+.tarjeta .controles-form-input,
+.tarjeta .controles-form-textarea {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+}
+
+.tarjeta .controles-form .botones {
+  display: flex !important;
+  gap: 8px !important;
+  justify-content: flex-end !important;
+}
+
+
+@media (max-width: 1000px) {
+  .tarjeta .controles-form-input,
+  .tarjeta .controles-form-textarea {
+    font-size: 0.96rem;
+    padding: 8px 10px;
+  }
+}
+
+
+
 
 /* =========================
    Botones
@@ -157,34 +215,44 @@ body {
   font-weight: 600;
 }
 
-.btn-like { background: linear-gradient(180deg,#eef2ff,#dfe8ff); color: #111827; }
-.btn-like:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
+.btn-like { background: linear-gradient(180deg,#eef2ff,#dfe8ff); color: #111827; border: 1px solid #d8d8d8;}
+.btn-like:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); border: 1px solid #187700;}
 
-.btn-edit { background: linear-gradient(180deg,#f0f0f0,#d9d9d9); color: #111827; }
+.btn-edit { background: linear-gradient(180deg,#f0f0f0,#d9d9d9); color: #111827; border: 1px solid #d8d8d8;}
 .btn-edit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
 
 .btn-delete { background: linear-gradient(180deg,#fff0f0,#ffeaea); color: #9b1c1c; border: 1px solid rgba(239,68,68,0.12); }
-.btn-delete:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(239,68,68,0.08); }
+.btn-delete:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(239,68,68,0.08); border: 1px solid #f87171;}
 
-/* Botones modo oscuro */
+
 .galeria.theme-dark .btn-like,
 .galeria.theme-dark .btn-edit {
-  background: #ffffff;
+  background: #d9d9d9;
   color: #000000;
   border: 1px solid rgba(0,0,0,0.08);
 }
-.galeria.theme-dark .btn-like:hover,
-.galeria.theme-dark .btn-edit:hover { background: #f0f0f0; }
+.galeria.theme-dark .btn-like:hover{background: #f0f0f0; box-shadow: 0 8px 20px rgba(152, 255, 104, 0.08); border: 1px solid #187700;}
+.galeria.theme-dark .btn-edit:hover { background: #f0f0f0; box-shadow: 0 8px 20px rgba(152, 255, 104, 0.08);}
 
 .galeria.theme-dark .btn-delete {
   background: #fee2e2;
   color: #b91c1c;
+  border: 1px solid #f87171;
 }
 .galeria.theme-dark .btn-delete:hover { background: #fca5a5; }
+
+
+
+
 
 /* =========================
    Controles (Formulario)
 ========================= */
+.galeria-header{
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
 .controles {
   display: flex;
   flex-direction: column;
@@ -194,7 +262,6 @@ body {
   margin: 0 auto 50px auto;
 }
 
-/* Wrapper tipo tarjeta */
 .controles-form-wrapper {
   background: #fff;
   border-radius: 12px;
@@ -205,27 +272,26 @@ body {
   gap: 12px;
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
+
 .controles-form-wrapper:hover {
   box-shadow: 0 14px 30px rgba(2,6,23,0.12);
 }
 
-/* Modo oscuro */
 .galeria.theme-dark .controles-form-wrapper {
   background: #1f1f1f;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }
+
 .galeria.theme-dark .controles-form-wrapper:hover {
   box-shadow: 0 14px 30px rgba(0,0,0,0.7);
 }
 
-/* Formulario interno */
 .controles-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Fila superior: título | url | añadir */
 .input-row {
   display: grid;
   grid-template-columns: 2fr 2fr auto;
@@ -233,36 +299,34 @@ body {
   align-items: end;
 }
 
-/* Cada input + label */
 .input-field {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-/* Botón añadir ocupa altura de input */
 .add-button-field button {
   height: 100%;
   border-radius: 10px;
   cursor: pointer;
   border: none;
-  background: linear-gradient(180deg, #111827, #333333);
+  background: linear-gradient(180deg, #111827, #000000);
   color: white;
   box-shadow: 0 8px 20px rgba(79,70,229,0.12);
   font-weight: 600;
   transition: all 140ms ease;
 }
+
 .add-button-field button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(79,70,229,0.2);
 }
 
-/* Inputs y textarea */
 .controles-form input,
 .controles-form textarea {
   padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #b0b0b0; /* borde oscuro para modo claro */
+  border: 1px solid #b0b0b0; 
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   font-size: 0.96rem;
   font-family: inherit;
@@ -280,20 +344,17 @@ body {
   box-shadow: 0 6px 20px rgba(99,102,241,0.1);
 }
 
-/* Textarea fila inferior */
 .input-field textarea {
   min-height: 60px;
   resize: vertical;
 }
 
-/* Etiquetas arriba de cada input */
 .input-field label {
   font-size: 0.85rem;
   color: #555;
   font-weight: 500;
 }
 
-/* Controles modo oscuro */
 .galeria.theme-dark .controles-form input,
 .galeria.theme-dark .controles-form textarea {
   background: #2b2b2b;
@@ -313,29 +374,24 @@ body {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Cada campo input con su label */
 .input-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px; /* aumenta separación vertical */
+  margin-bottom: 18px; 
 }
 
-/* Fila de Título + URL + Botón */
 .input-row {
   display: grid;
   grid-template-columns: 2fr 2fr auto;
   gap: 12px;
   align-items: end;
-  margin-bottom: 16px; /* espacio antes de la descripción */
+  margin-bottom: 16px; 
 }
 
-/* Descripción */
 .input-field.textarea-field {
-  margin-top: 8px; /* opcional, para que no quede pegada a la fila superior */
+  margin-top: 8px; 
 }
 
-
-/* Controles de acción (botones de mostrar/ocultar y tema) */
 .controles-actions {
   display: flex;
   gap: 10px;
@@ -351,7 +407,26 @@ body {
   box-shadow: 0 8px 20px rgba(79,70,229,0.12);
   transition: transform 140ms ease;
 }
+
 .controles-actions button:hover { transform: translateY(-3px); }
+
+.controles-form {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 2fr 2fr auto;
+  grid-template-areas: 
+    "titulo url boton"
+    "descripcion descripcion descripcion";
+  align-items: end;
+}
+
+.input-field.titulo { grid-area: titulo; }
+.input-field.url { grid-area: url; }
+.add-button-field { grid-area: boton; }
+.input-field.descripcion { grid-area: descripcion; }
+
+
+
 
 /* =========================
    Media Queries
@@ -370,39 +445,23 @@ body {
   }
   .galeria-header { padding: 14px; }
   .galeria-main { padding: 12px; }
+  .galeria-header{
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
 }
 
 @media (max-width: 700px) {
   .input-row { grid-template-columns: 1fr auto; }
   .add-button-field button { width: 100%; height: auto; }
   .input-field textarea { grid-column: 1 / -1; }
+  .galeria-header{
+  padding-bottom: 30px;
+  padding-top: 30px;
+  }
+  
 }
 
-@media (max-width: 600px) {
-  .galeria-grid { grid-template-columns: 1fr; gap: 16px; }
-  .controles-actions button, .btn-like, .btn-delete, .btn-edit { font-size: 0.82rem; padding: 6px 8px; }
-  .tarjeta-media { height: 150px; }
-  .tarjeta-title { font-size: 1.02rem; }
-}
-
-
-
-.controles-form {
-  display: grid;
-  gap: 8px;
-  grid-template-columns: 2fr 2fr auto;
-  grid-template-areas: 
-    "titulo url boton"
-    "descripcion descripcion descripcion";
-  align-items: end;
-}
-
-.input-field.titulo { grid-area: titulo; }
-.input-field.url { grid-area: url; }
-.add-button-field { grid-area: boton; }
-.input-field.descripcion { grid-area: descripcion; }
-
-/* Media query: en pantallas pequeñas, todo apilado */
 @media (max-width: 700px) {
   .controles-form {
     grid-template-columns: 1fr;
@@ -411,7 +470,6 @@ body {
       "url"
       "descripcion"
       "boton";
-    align-items: stretch;
   }
 
   .add-button-field button {
@@ -419,10 +477,49 @@ body {
   }
 }
 
+@media (max-width: 748px) {
+  .controles-form {
+    display: flex !important;
+    flex-direction: column !important; 
+    gap: 12px !important;
+  }
+
+  .input-field,
+  .add-button-field {
+    width: 100% !important;
+  }
+
+  .add-button-field {
+    margin-top: 8px; 
+  }
+
+  .add-button-field button {
+    width: 100% !important;
+    height: auto;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  .galeria-grid { grid-template-columns: 1fr; gap: 16px; }
+  .controles-actions button, .btn-like, .btn-delete, .btn-edit { font-size: 0.82rem; padding: 6px 8px; }
+  .tarjeta-media { height: 150px; }
+  .tarjeta-title { font-size: 1.02rem; }
+  .tarjeta .controles-form { grid-template-columns: 1fr;}
+  .tarjeta .controles-form-textarea,
+  .tarjeta .botones { grid-column: 1; }
+  .galeria-header{
+  padding-bottom: 30px;
+  padding-top: 30px;
+  }
+}
 
 .controles-form {
   display: grid;
-  gap: 16px; /* espacio vertical entre filas */
+  gap: 16px; 
   grid-template-columns: 2fr 2fr auto;
   grid-template-areas:
     "titulo url boton"
@@ -432,7 +529,7 @@ body {
 .input-field {
   display: flex;
   flex-direction: column;
-  gap: 6px; /* espacio entre label e input */
+  gap: 6px; 
 }
 
 .input-field.titulo { grid-area: titulo; }
@@ -441,8 +538,8 @@ body {
 .add-button-field { grid-area: boton; align-self: center; }
 
 .add-button-field button {
-  height: auto;       /* quitar altura del 100%, dejar que el padding defina la altura */
-  padding: 10px 14px; /* ajusta la altura un poco más pequeña si quieres */
+  height: auto;       
+  padding: 10px 14px; 
   border-radius: 10px;
   cursor: pointer;
   border: none;
@@ -453,14 +550,12 @@ body {
   transition: all 140ms ease;
 }
 
-
-
 .add-button-field button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(79,70,229,0.2);
 }
 
-/* Modo oscuro */
+
 .galeria.theme-dark .add-button-field button {
   background: linear-gradient(180deg, #ffffff, #e5e5e5);
   color: #000;
@@ -471,21 +566,7 @@ body {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Media query: en pantallas pequeñas, todo apilado */
-@media (max-width: 700px) {
-  .controles-form {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "titulo"
-      "url"
-      "descripcion"
-      "boton";
-  }
 
-  .add-button-field button {
-    width: 100%;
-  }
-}
 
 
 
