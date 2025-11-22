@@ -14,14 +14,11 @@ export type Card = {
 
 function Galeria() {
 
-  //Contiene todas las tarjetas de la galeria:
-  //El setCards permite modificar ese estado, osea cuando añades, borras, editas tarjeta.
   const [cards, setCards] = useState<Card[]>(elementos.map(item => ({ ...item, likes: 0, liked: false })));
-
-  //Botones: Añadir, Ocultar/Mostrar, Tema Claro/Oscuro:
-  //Están aqui con UseState y NO en Controles porque afectan a toda la pagina, no solo a un formulario:
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
+
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
   function agregarCard(titulo: string, url: string, descripcion: string) {
     const nuevaCard: Card = { id: Date.now(), titulo, url, descripcion, likes: 0, liked: false };
@@ -54,6 +51,18 @@ function Galeria() {
     );
   }
 
+
+  const handleDrop = (dropIndex: number) => {
+
+    if (draggedIndex === null || draggedIndex === dropIndex) return;
+    const newCards = [...cards];
+    const [movedCard] = newCards.splice(draggedIndex, 1);
+    newCards.splice(dropIndex, 0, movedCard);
+    setCards(newCards);
+    setDraggedIndex(null);
+  };
+
+
   return (
     <div className={`galeria ${dark ? "theme-dark" : "theme-light"}`}>
       <main className="galeria-main">
@@ -69,21 +78,26 @@ function Galeria() {
           <p className="galeria-hidden">Galería oculta</p>
         ) : (
           <div className="galeria-grid">
-            {cards.map(c => (
-              <Tarjeta
+            {cards.map((c, index) => (
+              <div
                 key={c.id}
-                titulo={c.titulo}
-                url={c.url}
-                descripcion={c.descripcion}
-                likes={c.likes}
-
-                //Funciones que provienen de Botones:
-                onDelete={() => eliminarCard(c.id)}
-                onLike={() => darLike(c.id)}
-                onEdit={(nuevoTitulo, nuevaUrl, nuevaDescripcion) =>
-                  editarCard(c.id, nuevoTitulo, nuevaUrl, nuevaDescripcion)
-                }
-              />
+                draggable
+                onDragStart={() => setDraggedIndex(index)}
+                onDragOver={e => e.preventDefault()} 
+                onDrop={() => handleDrop(index)}
+              >
+                <Tarjeta
+                  titulo={c.titulo}
+                  url={c.url}
+                  descripcion={c.descripcion}
+                  likes={c.likes}
+                  onDelete={() => eliminarCard(c.id)}
+                  onLike={() => darLike(c.id)}
+                  onEdit={(nuevoTitulo, nuevaUrl, nuevaDescripcion) =>
+                    editarCard(c.id, nuevoTitulo, nuevaUrl, nuevaDescripcion)
+                  }
+                />
+              </div>
             ))}
           </div>
         )}

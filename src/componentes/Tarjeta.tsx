@@ -6,8 +6,6 @@ type TarjetaProps = {
   url: string;
   descripcion: string;
   likes: number;
-
-  //Funciones de Botones:
   onDelete: () => void;
   onLike: () => void;
   onEdit: (nuevoTitulo: string, nuevaUrl: string, nuevaDescripcion: string) => void;
@@ -15,17 +13,27 @@ type TarjetaProps = {
 
 function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: TarjetaProps) {
 
-  //Botones de Editar y sus nuevos campos para meter dentro del target:
+
   const [editMode, setEditMode] = useState(false);
   const [newTitulo, setNewTitulo] = useState(titulo);
   const [newUrl, setNewUrl] = useState(url);
   const [newDescripcion, setNewDescripcion] = useState(descripcion);
 
-  //Guardar cambios:
+
   const handleSave = () => {
+
+    if (newUrl) {
+      try {
+        new URL(newUrl); 
+      } catch {
+        alert("Introduce una URL válida");
+        return;
+      }
+    }
+
     onEdit(newTitulo, newUrl, newDescripcion);
 
-    //Se desactiva el modo edición:
+
     setEditMode(false);
   };
 
@@ -37,7 +45,7 @@ function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: 
 
       <div className="tarjeta-body">
         {editMode ? (
-          <div className="controles-form" style={{ gap: "8px", flexDirection: "column" }}>
+          <form className="controles-form" style={{ gap: "8px", flexDirection: "column" }}>
             <input
               className="controles-form-input"
               value={newTitulo}
@@ -45,6 +53,7 @@ function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: 
               placeholder="Título"
             />
             <input
+              type="url"
               className="controles-form-input"
               value={newUrl}
               onChange={(e) => setNewUrl(e.target.value)}
@@ -57,10 +66,10 @@ function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: 
               placeholder="Descripción"
             />
             <div className="botones">
-              <button className="btn-edit" onClick={handleSave}>Guardar</button>
-              <button className="btn-delete" onClick={() => setEditMode(false)}>Cancelar</button>
+              <button type="submit" className="btn-edit" onClick={handleSave}>Guardar</button>
+              <button type="button" className="btn-delete" onClick={() => setEditMode(false)}>Cancelar</button>
             </div>
-          </div>
+          </form>
         ) : (
           <>
             <h3 className="tarjeta-title">{titulo}</h3>
