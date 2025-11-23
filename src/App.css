@@ -11,6 +11,14 @@ body {
   color: #111827;
 }
 
+button {
+  forced-color-adjust: none;
+}
+
+input, textarea {
+  forced-color-adjust: none;
+}
+
 
 
 
@@ -194,7 +202,7 @@ body {
 
 .botones { display: flex; gap: 8px; align-items: center; }
 
-.btn-like, .btn-edit, .btn-delete {
+.btn-like, .btn-edit, .btn-delete, .btn-guardar {
   padding: 10px 14px;
   border-radius: 10px;
   cursor: pointer;
@@ -204,24 +212,52 @@ body {
   font-weight: 600;
 }
 
-.btn-like { background: linear-gradient(180deg,#eef2ff,#dfe8ff); color: #111827; border: 1px solid #d8d8d8;}
-.btn-like:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); border: 1px solid #187700;}
+.btn-like { background: linear-gradient(180deg,#eef2ff,#dfe8ff); color: #111827; border: 1px solid #cccccc;}
+.btn-like:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); border: 1px solid #115300;}
 
-.btn-edit { background: linear-gradient(180deg,#f0f0f0,#d9d9d9); color: #111827; border: 1px solid #d8d8d8;}
-.btn-edit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
+.btn-edit { background: linear-gradient(180deg,#f0f0f0,#d9d9d9); color: #111827; border: 1px solid #cccccc;}
+.btn-edit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.12); border: 1px solid #115300;}
 
 .btn-delete { background: linear-gradient(180deg,#fff0f0,#ffeaea); color: #9b1c1c; border: 1px solid rgba(239,68,68,0.12); }
 .btn-delete:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(239,68,68,0.08); border: 1px solid #f87171;}
 
+.btn-guardar {
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  border: 1px solid transparent;
+  transition: all 160ms ease;
+  font-weight: 600;
+  background: linear-gradient(180deg,#d4f5d4,#a8e6a8);
+  color: #064e04;
+}
+
+.btn-guardar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,200,0,0.2); 
+  border: 1px solid #10b981;
+}
+
+.galeria.theme-dark .btn-guardar {
+  background: linear-gradient(180deg,#c5ffc7);
+  color: #006b05;
+  border: 1px solid #023800;
+}
+
+.galeria.theme-dark .btn-guardar:hover {
+  box-shadow: 0 8px 20px rgba(16,185,129,0.3);
+  border: 1px solid #10b981;
+}
 
 .galeria.theme-dark .btn-like,
 .galeria.theme-dark .btn-edit {
-  background: #000000;
+  background: #353535;
   color: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
-.galeria.theme-dark .btn-like:hover{background: #000000; box-shadow: 0 8px 20px rgba(152, 255, 104, 0.08); border: 1px solid #0e4400;}
-.galeria.theme-dark .btn-edit:hover { background: #000000; box-shadow: 0 8px 20px rgba(152, 255, 104, 0.08);}
+.galeria.theme-dark .btn-like:hover{box-shadow: 0 8px 20px rgba(152, 255, 104, 0.08); border: 1px solid #115300}
+.galeria.theme-dark .btn-edit:hover {box-shadow: 0 8px 20px rgba(152, 255, 104, 0.08); border: 1px solid #115300;}
 
 .galeria.theme-dark .btn-delete {
   background: #ffd3d3;
@@ -269,12 +305,6 @@ body {
 
 .galeria.theme-dark .controles-form-wrapper:hover {
   box-shadow: 0 14px 30px rgba(0,0,0,0.7);
-}
-
-.controles-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .input-row {
@@ -391,16 +421,6 @@ body {
 
 .controles-actions button:hover { transform: translateY(-3px); }
 
-.controles-form {
-  display: grid;
-  gap: 8px;
-  grid-template-columns: 2fr 2fr auto;
-  grid-template-areas: 
-    "titulo url boton"
-    "descripcion descripcion descripcion";
-  align-items: end;
-}
-
 .input-field.titulo { grid-area: titulo; }
 .input-field.url { grid-area: url; }
 .add-button-field { grid-area: boton; }
@@ -410,7 +430,7 @@ body {
 
 
 @media (max-width: 1000px) {
-  .controles-actions button, .btn-like, .btn-delete, .btn-edit { font-size: 0.95rem; padding: 8px 10px; }
+  .controles-actions button, .btn-like, .btn-delete, .btn-edit, .btn-guardar{ font-size: 0.95rem; padding: 8px 10px; }
   .tarjeta-media { height: 180px; }
   .tarjeta-body { padding: 14px; }
 }
@@ -434,17 +454,15 @@ body {
 
 
 @media (max-width: 700px) {
-  .input-row { grid-template-columns: 1fr auto; }
-  .add-button-field button { width: 100%; height: auto; }
-  .input-field textarea { grid-column: 1 / -1; }
-  .galeria-header{
-  padding-bottom: 30px;
-  padding-top: 30px;
-  }
-  
-}
 
-@media (max-width: 700px) {
+  .input-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .input-field textarea {
+    grid-column: 1 / -1;
+  }
+
   .controles-form {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -456,8 +474,16 @@ body {
 
   .add-button-field button {
     width: 100%;
+    height: auto;
   }
+
+  .galeria-header {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+
 }
+
 
 @media (max-width: 748px) {
   .controles-form {
@@ -487,7 +513,7 @@ body {
 
 @media (max-width: 600px) {
   .galeria-grid { grid-template-columns: 1fr; gap: 16px; }
-  .controles-actions button, .btn-like, .btn-delete, .btn-edit { font-size: 0.82rem; padding: 6px 8px; }
+  .controles-actions button, .btn-like, .btn-delete, .btn-edit, .btn-guardar { font-size: 0.82rem; padding: 6px 8px; }
   .tarjeta-media { height: 150px; }
   .tarjeta-title { font-size: 0.92rem; }
   .tarjeta-desc { font-size: 0.85rem; }
@@ -508,6 +534,7 @@ body {
   grid-template-areas:
     "titulo url boton"
     "descripcion descripcion descripcion";
+  align-items: end;
 }
 
 .input-field {

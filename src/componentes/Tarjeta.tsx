@@ -66,7 +66,7 @@ function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: 
               placeholder="Descripción"
             />
             <div className="botones">
-              <button type="submit" className="btn-edit" onClick={handleSave}>Guardar</button>
+              <button type="submit" className="btn-guardar" onClick={handleSave}>Guardar</button>
               <button type="button" className="btn-delete" onClick={() => setEditMode(false)}>Cancelar</button>
             </div>
           </form>
