@@ -111,7 +111,15 @@ La aplicación estará disponible en: **http://localhost:5173**
 
 ---
 
-## 8. Autora
+## 8. Despliegue
+
+El sistema está desplegado en Vercel y accesible en:
+
+**[https://gallery-space-three.vercel.app](https://gallery-space-three.vercel.app)**
+
+---
+
+## 9. Autora
 
 *   **Autora:** Mónica Muñoz de la Torre
 *   **Centro:** DIGITECH — CFGS Desarrollo de Aplicaciones Web
