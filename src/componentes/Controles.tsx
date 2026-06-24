@@ -34,7 +34,7 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
     <section className="controles">
       <div className="controles-form-wrapper">
         <div className="galeria-header">
-          <h1>Añadir un tarject</h1>
+          <h1>Añadir una tarjeta</h1>
         </div>
 
         <form className="controles-form" onSubmit={enviar}>
