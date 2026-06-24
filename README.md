@@ -1,7 +1,7 @@
-# Galería Interactiva — Proyecto React
+# Gallery Space — Proyecto React
 
 ## 1. Descripción del proyecto
-**Galería Interactiva** es una aplicación web desarrollada con React y TypeScript que permite gestionar una colección de tarjetas fotográficas de paisajes. El proyecto pone en práctica los fundamentos de React: gestión de estado con hooks, comunicación entre componentes mediante props, tipado estático con TypeScript y estilos CSS propios sin librerías externas.
+**Gallery Space** es una aplicación web desarrollada con React y TypeScript que permite gestionar una colección de tarjetas fotográficas de paisajes. El proyecto pone en práctica los fundamentos de React: gestión de estado con hooks, comunicación entre componentes mediante props, tipado estático con TypeScript y estilos CSS propios sin librerías externas.
 
 **Objetivo general:** Construir una SPA funcional con operaciones CRUD sobre una galería de tarjetas, incorporando funcionalidades adicionales como modo oscuro, drag & drop para reordenar y sistema de likes.
 
@@ -83,16 +83,6 @@ npm run dev
 ```
 
 La aplicación estará disponible en: **http://localhost:5173**
-
-### 5.5 Otros comandos disponibles
-
-| Comando | Descripción |
-|---|---|
-| `npm run build` | Genera la build de producción en `/dist` |
-| `npm run preview` | Previsualiza la build de producción en local |
-| `npm run lint` | Ejecuta el análisis de ESLint |
-
----
 
 ## 6. Componentes principales
 
