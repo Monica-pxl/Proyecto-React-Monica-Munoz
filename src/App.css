@@ -1,5 +1,4 @@
-﻿
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 
 html, body, #root {
@@ -17,6 +16,7 @@ body {
 button {
   forced-color-adjust: none;
   font-family: inherit;
+  touch-action: manipulation;
 }
 
 input, textarea, select {
@@ -91,13 +91,6 @@ input, textarea, select {
   animation: fadeUp 350ms ease both;
 }
 
-.tarjeta:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 4px 12px rgba(15,23,42,0.08),
-    0 10px 24px rgba(15,23,42,0.09);
-}
-
 .tarjeta-media {
   height: 220px;
   overflow: hidden;
@@ -111,10 +104,6 @@ input, textarea, select {
   object-fit: cover;
   display: block;
   transition: transform 420ms ease;
-}
-
-.tarjeta:hover .tarjeta-media img {
-  transform: scale(1.07);
 }
 
 .tarjeta-body {
@@ -188,10 +177,6 @@ input, textarea, select {
   background: #22252a;
   border-color: #363a40;
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-.galeria.theme-dark .tarjeta:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.32);
 }
 
 .galeria.theme-dark .tarjeta-title  { color: #f1f5f9; }
@@ -481,6 +466,21 @@ input, textarea, select {
 
 /* RESPONSIVE */
 @media (hover: hover) and (pointer: fine) {
+  .tarjeta:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 4px 12px rgba(15,23,42,0.08),
+      0 10px 24px rgba(15,23,42,0.09);
+  }
+
+  .galeria.theme-dark .tarjeta:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.32);
+  }
+
+  .tarjeta:hover .tarjeta-media img {
+    transform: scale(1.07);
+  }
+
   .btn-like:hover {
     background: #596873;
     color: #fff;
