@@ -451,24 +451,6 @@ input, textarea, select {
   transition: all 150ms ease;
 }
 
-.controles-actions button:hover {
-  background: #f8fafc;
-  border-color: #aeb4b6;
-  box-shadow: 0 2px 7px rgba(15,23,42,0.08);
-}
-
-.galeria.theme-light .controles-actions .btn-theme-toggle:hover {
-  background: #17191c;
-  border-color: #17191c;
-  color: #fff;
-}
-
-.galeria.theme-dark .controles-actions .btn-theme-toggle:hover {
-  background: #fff;
-  border-color: #fff;
-  color: #17191c;
-}
-
 /* â”€â”€ DARK FORM â”€â”€ */
 .galeria.theme-dark .controles-form-wrapper {
   background: #22252a;
@@ -507,12 +489,32 @@ input, textarea, select {
   color: #cbd5e1;
 }
 
-.galeria.theme-dark .controles-actions button:hover {
-  background: #343a40;
-  border-color: #59616a;
+/* RESPONSIVE */
+@media (hover: hover) and (pointer: fine) {
+  .controles-actions button:hover {
+    background: #f8fafc;
+    border-color: #aeb4b6;
+    box-shadow: 0 2px 7px rgba(15,23,42,0.08);
+  }
+
+  .galeria.theme-light .controles-actions .btn-theme-toggle:hover {
+    background: #17191c;
+    border-color: #17191c;
+    color: #fff;
+  }
+
+  .galeria.theme-dark .controles-actions .btn-theme-toggle:hover {
+    background: #fff;
+    border-color: #fff;
+    color: #17191c;
+  }
+
+  .galeria.theme-dark .controles-actions button:hover {
+    background: #343a40;
+    border-color: #59616a;
+  }
 }
 
-/* RESPONSIVE */
 @media (max-width: 1100px) {
   .galeria-grid {
     grid-template-columns: repeat(2, 1fr);

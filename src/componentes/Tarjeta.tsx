@@ -75,8 +75,8 @@ function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: 
             <h3 className="tarjeta-title">{titulo}</h3>
             <p className="tarjeta-desc">{descripcion}</p>
             <div className="tarjeta-row">
-              <small className="tarjeta-likes">
-                {likes} {likes === 1 ? "like" : "likes"}
+              <small className="tarjeta-likes" aria-live="polite">
+                {likes} me gusta
               </small>
               <Botones
                 onLike={onLike}
