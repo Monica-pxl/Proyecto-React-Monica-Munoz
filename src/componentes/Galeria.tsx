@@ -18,13 +18,13 @@ function Galeria() {
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(() =>
-    window.matchMedia("(hover: none) and (any-pointer: coarse)").matches
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches
   );
 
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: none) and (any-pointer: coarse)");
+    const mediaQuery = window.matchMedia("(hover: none) and (pointer: coarse)");
     const updateTouchDevice = () => setIsTouchDevice(mediaQuery.matches);
 
     mediaQuery.addEventListener("change", updateTouchDevice);
@@ -90,26 +90,7 @@ function Galeria() {
               <div
                 key={c.id}
                 draggable={!isTouchDevice}
-                onPointerDownCapture={event => {
-                  if (event.pointerType === "touch") {
-                    setIsTouchDevice(true);
-                    event.currentTarget.draggable = false;
-                  } else if (event.pointerType === "mouse") {
-                    setIsTouchDevice(false);
-                    event.currentTarget.draggable = true;
-                  }
-                }}
-                onTouchStartCapture={event => {
-                  setIsTouchDevice(true);
-                  event.currentTarget.draggable = false;
-                }}
-                onDragStart={event => {
-                  if (event.target instanceof Element && event.target.closest("button")) {
-                    event.preventDefault();
-                    return;
-                  }
-                  setDraggedIndex(index);
-                }}
+                onDragStart={() => setDraggedIndex(index)}
                 onDragOver={e => e.preventDefault()} 
                 onDrop={() => handleDrop(index)}
               >

@@ -40,7 +40,7 @@ function Tarjeta({ titulo, url, descripcion, likes, onDelete, onLike, onEdit }: 
   return (
     <article className="tarjeta">
       <div className="tarjeta-media">
-        <img src={editMode ? newUrl : url} alt={titulo} draggable={false} />
+        <img src={editMode ? newUrl : url} alt={titulo} />
       </div>
 
       <div className="tarjeta-body">
