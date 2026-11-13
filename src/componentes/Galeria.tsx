@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { elementos } from "../data/data";
 import Tarjeta from "./Tarjeta";
 import Controles from "./Controles";
@@ -17,37 +17,43 @@ function Galeria() {
   const [cards, setCards] = useState<Card[]>(elementos.map(item => ({ ...item, likes: 0, liked: false })));
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(() =>
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches
+  );
 
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none) and (pointer: coarse)");
+    const updateTouchDevice = () => setIsTouchDevice(mediaQuery.matches);
+
+    mediaQuery.addEventListener("change", updateTouchDevice);
+    return () => mediaQuery.removeEventListener("change", updateTouchDevice);
+  }, []);
+
   function agregarCard(titulo: string, url: string, descripcion: string) {
     const nuevaCard: Card = { id: Date.now(), titulo, url, descripcion, likes: 0, liked: false };
-    setCards([nuevaCard, ...cards]);
+    setCards(currentCards => [nuevaCard, ...currentCards]);
   }
 
   function eliminarCard(id: number) {
-    setCards(cards.filter(c => c.id !== id));
+    setCards(currentCards => currentCards.filter(c => c.id !== id));
   }
 
   function darLike(id: number) {
-    setCards(cards.map(c => {
-
-      if (c.id === id) {
-
-        if (c.liked) {
-          return { ...c, likes: c.likes - 1, liked: false };
-
-        }else{
-          return { ...c, likes: c.likes + 1, liked: true };
-        }
-      }
-      return c;
+    setCards(currentCards => currentCards.map(card => {
+      if (card.id !== id) return card;
+      const liked = !card.liked;
+      return { ...card, liked, likes: card.likes + (liked ? 1 : -1) };
     }));
   }
 
   function editarCard(id: number, nuevoTitulo: string, nuevaUrl: string, nuevaDescripcion: string) {
-    setCards(
-      cards.map(c => c.id === id ? { ...c, titulo: nuevoTitulo, url: nuevaUrl, descripcion: nuevaDescripcion } : c)
+    setCards(currentCards =>
+      currentCards.map(card => card.id === id
+        ? { ...card, titulo: nuevoTitulo, url: nuevaUrl, descripcion: nuevaDescripcion }
+        : card
+      )
     );
   }
 
@@ -55,10 +61,12 @@ function Galeria() {
   const handleDrop = (dropIndex: number) => {
 
     if (draggedIndex === null || draggedIndex === dropIndex) return;
-    const newCards = [...cards];
-    const [movedCard] = newCards.splice(draggedIndex, 1);
-    newCards.splice(dropIndex, 0, movedCard);
-    setCards(newCards);
+    setCards(currentCards => {
+      const newCards = [...currentCards];
+      const [movedCard] = newCards.splice(draggedIndex, 1);
+      newCards.splice(dropIndex, 0, movedCard);
+      return newCards;
+    });
     setDraggedIndex(null);
   };
 
@@ -81,7 +89,7 @@ function Galeria() {
             {cards.map((c, index) => (
               <div
                 key={c.id}
-                draggable
+                draggable={!isTouchDevice}
                 onDragStart={() => setDraggedIndex(index)}
                 onDragOver={e => e.preventDefault()} 
                 onDrop={() => handleDrop(index)}

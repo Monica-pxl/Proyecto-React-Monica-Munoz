@@ -65,7 +65,7 @@ function Controles({ onAdd, onToggle, onToggleTheme, visible, isDark }: Controle
           {visible ? "Ocultar galería" : "Mostrar galería"}
         </button>
 
-        <button onClick={onToggleTheme}>
+        <button className="btn-theme-toggle" onClick={onToggleTheme}>
           {isDark ? "Modo claro ☀️​" : "Modo oscuro 🌙​"}
         </button>
       </div>
