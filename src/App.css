@@ -227,14 +227,6 @@ input, textarea, select {
   color: #47545d;
   border-color: #d6dadd;
 }
-.btn-like:hover {
-  background: #596873;
-  color: #fff;
-  border-color: #596873;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 9px rgba(15,23,42,0.16);
-}
-
 /* Editar */
 .btn-edit {
   background: #f8fafc;
@@ -285,8 +277,6 @@ input, textarea, select {
 
 /* Botones en tema oscuro */
 .galeria.theme-dark .btn-like    { background: #292d32; color: #c0c8ce; border-color: #41474e; }
-.galeria.theme-dark .btn-like:hover { background: #596873; color: #fff; border-color: #596873; }
-
 .galeria.theme-dark .btn-edit    { background: #292d32; color: #b4bcc3; border-color: #3a3f46; }
 .galeria.theme-dark .btn-edit:hover { background: #343a40; color: #e2e8f0; border-color: #59616a; }
 
@@ -491,6 +481,20 @@ input, textarea, select {
 
 /* RESPONSIVE */
 @media (hover: hover) and (pointer: fine) {
+  .btn-like:hover {
+    background: #596873;
+    color: #fff;
+    border-color: #596873;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 9px rgba(15,23,42,0.16);
+  }
+
+  .galeria.theme-dark .btn-like:hover {
+    background: #596873;
+    color: #fff;
+    border-color: #596873;
+  }
+
   .controles-actions button:hover {
     background: #f8fafc;
     border-color: #aeb4b6;

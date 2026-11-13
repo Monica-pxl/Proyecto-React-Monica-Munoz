@@ -18,6 +18,7 @@ function Galeria() {
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(() =>
+    navigator.maxTouchPoints > 0 ||
     window.matchMedia("(hover: none) and (pointer: coarse)").matches
   );
 
@@ -25,7 +26,8 @@ function Galeria() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(hover: none) and (pointer: coarse)");
-    const updateTouchDevice = () => setIsTouchDevice(mediaQuery.matches);
+    const updateTouchDevice = () =>
+      setIsTouchDevice(navigator.maxTouchPoints > 0 || mediaQuery.matches);
 
     mediaQuery.addEventListener("change", updateTouchDevice);
     return () => mediaQuery.removeEventListener("change", updateTouchDevice);
