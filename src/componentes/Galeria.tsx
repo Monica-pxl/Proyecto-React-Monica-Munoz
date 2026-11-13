@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { elementos } from "../data/data";
 import Tarjeta from "./Tarjeta";
 import Controles from "./Controles";
@@ -18,14 +18,13 @@ function Galeria() {
   const [visible, setVisible] = useState(true);
   const [dark, setDark] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(() =>
-    window.matchMedia("(hover: none) and (pointer: coarse)").matches
+    window.matchMedia("(hover: none) and (any-pointer: coarse)").matches
   );
 
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-  const touchPointerActive = useRef(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: none) and (pointer: coarse)");
+    const mediaQuery = window.matchMedia("(hover: none) and (any-pointer: coarse)");
     const updateTouchDevice = () => setIsTouchDevice(mediaQuery.matches);
 
     mediaQuery.addEventListener("change", updateTouchDevice);
@@ -93,22 +92,19 @@ function Galeria() {
                 draggable={!isTouchDevice}
                 onPointerDownCapture={event => {
                   if (event.pointerType === "touch") {
-                    touchPointerActive.current = true;
+                    setIsTouchDevice(true);
                     event.currentTarget.draggable = false;
+                  } else if (event.pointerType === "mouse") {
+                    setIsTouchDevice(false);
+                    event.currentTarget.draggable = true;
                   }
                 }}
-                onPointerUpCapture={event => {
-                  if (event.pointerType === "touch") {
-                    touchPointerActive.current = false;
-                    event.currentTarget.draggable = !isTouchDevice;
-                  }
-                }}
-                onPointerCancel={event => {
-                  touchPointerActive.current = false;
-                  event.currentTarget.draggable = !isTouchDevice;
+                onTouchStartCapture={event => {
+                  setIsTouchDevice(true);
+                  event.currentTarget.draggable = false;
                 }}
                 onDragStart={event => {
-                  if (touchPointerActive.current) {
+                  if (event.target instanceof Element && event.target.closest("button")) {
                     event.preventDefault();
                     return;
                   }
